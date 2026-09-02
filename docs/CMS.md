@@ -1,56 +1,52 @@
 # Pages CMS
 
+O painel edita a branch `editorial`. Salvar conteúdo ali não altera o site público.
+
 ## Acesso
 
-1. Entre em [app.pagescms.org](https://app.pagescms.org/) com a conta do GitHub.
-2. Autorize apenas o repositório `viniciusdaniel-law/nixon-brasil`.
-3. Selecione a branch `editorial` — não edite `main` diretamente.
+1. Entre em [app.pagescms.org](https://app.pagescms.org/) com o GitHub.
+2. Autorize somente `viniciusdaniel-law/nixon-brasil`.
+3. Confirme que a branch selecionada é `editorial`.
 
-O painel lê `.pages.yml` nessa branch e exibe duas coleções: **Artigos** e **Documentos do acervo**. A branch `editorial` funciona como área de trabalho; `main` é a produção publicada.
+O menu possui quatro áreas:
 
-## Publicar um artigo
+- **Artigos**;
+- **Documentos do acervo**;
+- **Páginas institucionais**;
+- **Configurações do site**.
 
-1. Abra **Artigos → New entry**.
-2. Preencha título, subtítulo, resumo, data, autor e categoria.
-3. Escolha a posição na página inicial:
-   - `lead`: matéria principal; mantenha apenas um artigo nessa posição;
-   - `rail`: lista lateral, limitada aos quatro artigos mais recentes;
-   - `none`: não aparece na seleção da página inicial.
-4. Adicione imagem, texto alternativo e crédito.
-5. Escreva e revise o texto.
-6. Mantenha **Rascunho** ativo até a revisão final.
-7. Para publicar, desative **Rascunho** e salve.
-8. Abra [a comparação `editorial` → `main`](https://github.com/viniciusdaniel-law/nixon-brasil/compare/main...editorial?expand=1), crie a pull request e aguarde o check `build`.
-9. Revise a prévia e faça o merge somente quando o check estiver aprovado.
+## Artigos
 
-O CMS cria ou atualiza um arquivo em `src/content/artigos/`. Salvar no CMS não publica o site; a publicação começa somente quando a pull request chega à branch `main`.
+Preencha título, resumo, data, categoria e texto. A assinatura padrão é `nixonbrazil`; use uma assinatura pessoal somente depois da revisão do autor indicado.
 
-## Cadastrar um documento
+Na página inicial:
 
-Registre:
+- `lead` seleciona a matéria principal — deve existir apenas uma;
+- `rail` envia o artigo para a lista lateral;
+- `none` publica sem destaque na home.
 
-- título editorial e título original;
-- data e formato;
-- tema;
-- instituição ou arquivo de origem;
-- referência oficial;
-- URL do original;
-- situação da tradução;
-- nota documental.
+Imagem de capa exige texto alternativo, crédito e situação de direitos. URLs de fontes devem usar HTTPS. Mantenha **Rascunho** ativo enquanto o texto não estiver pronto.
 
-Não estime códigos de caixa, pasta ou documento. Se a referência não estiver disponível na instituição de custódia, deixe o campo vazio.
+## Acervo
 
-## Imagens
+Cada entrada deve informar título, data, formato, tema, arquivo de origem e URL do documento. Referências de caixa, pasta ou código arquivístico só devem ser preenchidas quando confirmadas pela instituição de custódia.
 
-Uploads são gravados em `public/uploads/`. Antes de publicar, confirme:
+O campo de texto serve para contexto, comentário ou tradução. A página pública do documento mostra essa informação e conduz ao original.
 
-- descrição visual;
-- fotógrafo ou órgão produtor;
-- coleção e identificador, quando disponíveis;
-- licença ou situação de domínio público.
+## Páginas e configurações
 
-Crédito não substitui autorização de uso.
+Biografia, Nixon e o Brasil e Sobre o projeto são arquivos únicos. O painel não permite criar uma segunda página com o mesmo papel.
 
-## Correção e retirada
+Configurações do site controla a apresentação da home, os links do menu e a descrição do rodapé. Não altere uma URL interna sem confirmar que a rota existe.
 
-Para uma correção simples, edite a entrada e preencha **Última atualização**. Para retirar um artigo sem apagá-lo, ative **Rascunho**. Salve na branch `editorial` e use a mesma pull request de revisão. O histórico anterior permanece no GitHub.
+## Publicar
+
+1. Revise as alterações na branch `editorial`.
+2. Abra a [comparação `editorial` → `main`](https://github.com/viniciusdaniel-law/nixon-brasil/compare/main...editorial?expand=1).
+3. Crie a pull request.
+4. Aguarde o check `build`.
+5. Leia o diff e a prévia.
+6. Use **Squash and merge**.
+7. Sincronize `editorial` com `main` antes da próxima edição.
+
+Para retirar conteúdo sem apagar o histórico, ative **Rascunho** e publique a alteração pelo mesmo fluxo.

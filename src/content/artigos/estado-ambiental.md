@@ -4,7 +4,7 @@ subtitle: "NEPA, EPA e Clean Air Act deram forma administrativa e jurídica à a
 description: "As decisões ambientais da administração Nixon vistas por legislação, organização institucional e capacidade regulatória."
 publishedAt: 2026-07-22
 updatedAt: 2026-07-28
-author: "Nixon Brasil"
+author: "nixonbrazil"
 category: "Presidência"
 cover: "https://commons.wikimedia.org/wiki/Special:Redirect/file/President_Richard_Nixon_Signing_the_National_Environmental_Policy_Act_of_1969_(cropped).jpg"
 coverAlt: "Richard Nixon assina a National Environmental Policy Act"

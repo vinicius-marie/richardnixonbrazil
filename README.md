@@ -1,4 +1,4 @@
-# Nixon Brasil
+# nixonbrazil
 
 [nixonbrazil.page](https://nixonbrazil.page) é uma publicação histórica independente sobre Richard Nixon, sua Presidência, a política externa do período e as relações entre Estados Unidos e Brasil.
 
@@ -8,6 +8,8 @@ Artigos e fichas documentais são escritos em Markdown. O site usa Astro, é com
 
 - **Artigos:** ensaios e dossiês com autoria, data e fontes.
 - **Acervo:** documentos com referência, instituição de origem e situação da tradução.
+- **Páginas institucionais:** Biografia, Nixon e o Brasil e Sobre o projeto.
+- **Configurações:** apresentação da página inicial, menu e rodapé.
 
 O painel trabalha na branch `editorial`. A publicação ocorre somente depois de uma pull request para `main` e do check `build`.
 

@@ -36,7 +36,7 @@ content:
       - name: author
         label: Autor
         type: string
-        default: Nixon Brasil
+        default: nixonbrazil
       - name: category
         label: Categoria
         type: select
@@ -58,9 +58,18 @@ content:
       - name: coverCredit
         label: Crédito da imagem
         type: string
+      - name: coverRights
+        label: Direitos da imagem
+        type: string
       - name: sourceUrl
         label: Fonte primária principal
         type: string
+        pattern: "^https://"
+      - name: sources
+        label: Fontes adicionais
+        type: string
+        list: true
+        pattern: "^https://"
       - name: homePlacement
         label: Posição na página inicial
         type: select
@@ -136,6 +145,7 @@ content:
         label: Link para o original
         type: string
         required: true
+        pattern: "^https://"
       - name: translationStatus
         label: Situação da tradução
         type: select
@@ -147,9 +157,73 @@ content:
       - name: description
         label: Nota documental
         type: text
+      - name: sources
+        label: Fontes adicionais
+        type: string
+        list: true
+        pattern: "^https://"
+      - name: draft
+        label: Rascunho
+        type: boolean
+        default: true
       - name: body
         label: Comentário ou tradução
         type: rich-text
+
+  - name: paginas
+    label: Páginas institucionais
+    type: group
+    items:
+      - name: biografia
+        label: Biografia
+        type: file
+        path: src/content/paginas/biografia.md
+        fields: &institutional_fields
+          - { name: title, label: Título, type: string, required: true }
+          - { name: eyebrow, label: Sobretítulo, type: string, required: true }
+          - { name: description, label: Descrição para busca, type: text, required: true }
+          - { name: lede, label: Apresentação, type: text, required: true }
+          - { name: updatedAt, label: Última revisão, type: date, required: true }
+          - { name: body, label: Texto, type: rich-text, required: true }
+      - name: brasil
+        label: Nixon e o Brasil
+        type: file
+        path: src/content/paginas/brasil.md
+        fields: *institutional_fields
+      - name: sobre
+        label: Sobre o projeto
+        type: file
+        path: src/content/paginas/sobre.md
+        fields: *institutional_fields
+
+  - name: configuracoes
+    label: Configurações do site
+    type: file
+    path: src/data/site.json
+    format: json
+    fields:
+      - name: home
+        label: Página inicial
+        type: object
+        fields:
+          - { name: eyebrow, label: Sobretítulo, type: string, required: true }
+          - { name: title, label: Título, type: string, required: true }
+          - { name: introduction, label: Apresentação, type: text, required: true }
+          - { name: heroImage, label: Imagem principal, type: image, required: true }
+          - { name: heroAlt, label: Texto alternativo, type: string, required: true }
+          - { name: heroCredit, label: Crédito e direitos, type: string, required: true }
+          - { name: primaryLabel, label: Botão principal, type: string, required: true }
+          - { name: primaryUrl, label: URL do botão principal, type: string, required: true, pattern: "^/" }
+          - { name: secondaryLabel, label: Botão secundário, type: string, required: true }
+          - { name: secondaryUrl, label: URL do botão secundário, type: string, required: true, pattern: "^/" }
+      - name: navigation
+        label: Menu
+        type: object
+        list: true
+        fields:
+          - { name: label, label: Rótulo, type: string, required: true }
+          - { name: url, label: URL interna, type: string, required: true, pattern: "^/" }
+      - { name: footerDescription, label: Descrição do rodapé, type: text, required: true }
 
 settings:
   commit:

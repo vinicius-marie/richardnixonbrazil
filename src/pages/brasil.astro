@@ -1,12 +1,8 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+import InstitutionalPage from '../components/InstitutionalPage.astro';
+
+const entry = await getEntry('paginas', 'brasil');
+if (!entry) throw new Error('Página sobre o Brasil indisponível.');
 ---
-<BaseLayout title="Nixon e o Brasil" description="Documentos, acordos e negociações entre os Estados Unidos de Richard Nixon e o Brasil do início dos anos 1970.">
-  <section class="page-hero"><div class="shell"><p class="kicker light">Relações bilaterais</p><h1>Nixon e o Brasil</h1><p>Comércio, café, pesca, energia, investimento e estratégia hemisférica nos documentos dos anos Nixon.</p></div></section>
-  <section class="section white"><div class="shell prose-shell"><nav class="prose-nav" aria-label="Nesta página"><a href="#potencia">Potência regional</a><a href="#agenda">Agenda bilateral</a><a href="#divergencias">Divergências</a><a href="#fontes">Fontes</a></nav><article class="prose">
-    <p class="kicker" id="potencia">Washington e Brasília</p><h2>O Brasil como potência regional.</h2><p>A documentação da Casa Branca tratava o Brasil como ator central da América do Sul, relevante por escala territorial, crescimento econômico e influência regional. Em dezembro de 1971, Nixon quis consultar Médici antes das viagens a Pequim e Moscou. Essa importância estratégica não implicava identidade automática de interesses.</p>
-    <p class="kicker" id="agenda">1971 — 1972</p><h2>Uma pauta concreta.</h2><p>As conversações incluíam café, pesca de camarão, têxteis, investimento e cooperação em energia atômica. Divergências comerciais eram negociadas dentro de uma relação política mais ampla.</p>
-    <p class="kicker" id="divergencias">Autonomia</p><h2>Cooperação sem alinhamento completo.</h2><p>Brasil e Estados Unidos divergiam sobre comércio, mar territorial, China e arquitetura hemisférica. Brasília buscava preservar margem de manobra; Washington procurava influência e previsibilidade regional.</p>
-    <p class="kicker" id="fontes">Documentação primária</p><h2>Leitura direta.</h2><p><a href="https://history.state.gov/historicaldocuments/frus1969-76ve10/d141" target="_blank" rel="noreferrer">Memorando da reunião Nixon–Médici, dezembro de 1971 ↗</a></p><p><a href="https://history.state.gov/historicaldocuments/frus1969-76ve10/d149" target="_blank" rel="noreferrer">Memorando preparado para a reunião Nixon–Delfim Neto, 28 de julho de 1972 ↗</a></p>
-  </article></div></section>
-</BaseLayout>
+<InstitutionalPage entry={entry} />

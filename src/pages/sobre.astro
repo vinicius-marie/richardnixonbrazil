@@ -1,13 +1,8 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+import InstitutionalPage from '../components/InstitutionalPage.astro';
+
+const entry = await getEntry('paginas', 'sobre');
+if (!entry) throw new Error('Página Sobre indisponível.');
 ---
-<BaseLayout title="Sobre o projeto" description="Missão, critérios editoriais e situação do Nixon Brasil.">
-  <section class="page-hero light"><div class="shell"><p class="kicker">Institucional</p><h1>Sobre o projeto</h1><p>Uma iniciativa brasileira dedicada a preservar e apresentar o legado de Richard Nixon em língua portuguesa.</p></div></section>
-  <section class="section white"><div class="shell prose-shell"><nav class="prose-nav" aria-label="Nesta página"><a href="#missao">Missão</a><a href="#criterios">Critérios</a><a href="#fontes">Fontes</a><a href="#situacao">Situação</a><a href="#como">Como funciona</a></nav><article class="prose">
-    <p class="kicker" id="missao">Missão</p><h2>Preservar, traduzir e difundir.</h2><p>O Nixon Brasil reúne artigos, documentos, discursos, vídeos e imagens sobre o 37º presidente dos Estados Unidos. O foco está na Presidência, na diplomacia, nas reformas internas, na trajetória pessoal e nas relações com o Brasil.</p>
-    <p class="kicker" id="criterios">Linha editorial</p><h2>O legado em primeiro plano.</h2><p>A seleção editorial acompanha a trajetória de Nixon, sua Presidência, seus escritos e os documentos de governo que ajudam a explicar suas decisões. O material é preparado para leitores brasileiros, com atenção especial às relações entre Estados Unidos e Brasil.</p><p>Datas, citações e afirmações históricas devem ser verificáveis. Traduções são identificadas; imagens recebem crédito e informação de direitos sempre que disponível.</p>
-    <p class="kicker" id="fontes">Fontes</p><h2>O documento como ponto de partida.</h2><p>A base inclui Nixon Library/NARA, <em>Foreign Relations of the United States</em>, American Presidency Project, legislação, memorandos, gravações, discursos e bibliografia especializada.</p>
-    <p class="kicker" id="situacao">Situação</p><h2>Iniciativa independente.</h2><p>O Nixon Brasil é um projeto brasileiro independente. Não possui vínculo oficial com a Richard Nixon Foundation, a Richard Nixon Presidential Library, a NARA ou o governo dos Estados Unidos.</p>
-    <p class="kicker" id="como">Publicação</p><h2>Do arquivo ao público brasileiro.</h2><p>O site reúne o acervo em português e serve de base para artigos, redes sociais, vídeos legendados e futuras iniciativas educacionais.</p>
-  </article></div></section>
-</BaseLayout>
+<InstitutionalPage entry={entry} />

@@ -47,11 +47,12 @@ const minutes = Math.max(1, Math.round(words / 220));
     )}
     <div class="article-body">
       <Content />
-      {article.data.sourceUrl && (
+      {(article.data.sourceUrl || article.data.sources.length > 0) && (
         <aside class="article-sources">
-          <h2>Referência principal</h2>
+          <h2>Fontes</h2>
           <ul>
-            <li><a href={article.data.sourceUrl} target="_blank" rel="noreferrer">Consultar documento ou coleção ↗</a></li>
+            {article.data.sourceUrl && <li><a href={article.data.sourceUrl} target="_blank" rel="noreferrer">Fonte principal ↗</a></li>}
+            {article.data.sources.map((source) => <li><a href={source} target="_blank" rel="noreferrer">{source} ↗</a></li>)}
           </ul>
         </aside>
       )}

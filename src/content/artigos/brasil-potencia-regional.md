@@ -4,7 +4,7 @@ subtitle: "Os memorandos dos anos Nixon registram consulta estratégica, negocia
 description: "O lugar do Brasil na política hemisférica da administração Nixon, a partir de documentos da Casa Branca e do Departamento de Estado."
 publishedAt: 2026-07-21
 updatedAt: 2026-07-28
-author: "Nixon Brasil"
+author: "nixonbrazil"
 category: "Nixon e o Brasil"
 cover: "https://commons.wikimedia.org/wiki/Special:Redirect/file/RichardNixon.jpg"
 coverAlt: "Retrato oficial do presidente Richard Nixon"

@@ -8,6 +8,7 @@ archive: "Department of State / FRUS"
 reference: "FRUS 1969–1976, Volume XVII, Document 203"
 originalUrl: "https://history.state.gov/historicaldocuments/frus1969-76v17/d203"
 translationStatus: "Tradução em preparação"
+draft: false
 description: "Declaração final da visita presidencial à China: interesses comuns, posições distintas sobre Taiwan e bases para a continuidade do relacionamento."
 ---
 

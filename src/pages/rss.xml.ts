@@ -21,7 +21,7 @@ export async function GET({ site }: { site: URL }) {
   }).join('');
 
   const home = new URL(base, site).toString();
-  const xml = `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Nixon Brasil</title><link>${home}</link><description>Richard Nixon em português</description><language>pt-BR</language>${items}</channel></rss>`;
+  const xml = `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>nixonbrazil</title><link>${home}</link><description>Richard Nixon em português</description><language>pt-BR</language>${items}</channel></rss>`;
 
   return new Response(xml, { headers: { 'Content-Type': 'application/rss+xml; charset=utf-8' } });
 }

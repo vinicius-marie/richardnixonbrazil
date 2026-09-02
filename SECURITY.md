@@ -2,7 +2,7 @@
 
 ## Arquitetura
 
-O Nixon Brasil é gerado como site estático. Não possui banco de dados público, sessão de usuário, formulário de autenticação, chave de API ou execução de código no servidor.
+O nixonbrazil é gerado como site estático. Não possui banco de dados público, sessão de usuário, formulário de autenticação, chave de API ou execução de código no servidor.
 
 ## Regras operacionais
 

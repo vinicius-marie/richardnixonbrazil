@@ -1,8 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { formatDate } from '../lib/dates';
 
-const docs = (await getCollection('documentos')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const docs = (await getCollection('documentos', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const base = import.meta.env.BASE_URL;
 ---
 <BaseLayout title="Acervo" description="Documentos, discursos, fotografias, gravações e leis relacionados à vida e à Presidência de Richard Nixon.">
@@ -14,10 +16,13 @@ const base = import.meta.env.BASE_URL;
     </div>
     <div class="archive-list" id="archive-list">
       {docs.map((doc) => (
-        <a class="archive-row" href={doc.data.originalUrl} target="_blank" rel="noreferrer" data-search={`${doc.data.title} ${doc.data.originalTitle ?? ''} ${doc.data.category} ${doc.data.archive ?? ''} ${doc.data.reference ?? ''}`.toLowerCase()} data-category={doc.data.category}>
-          <time datetime={doc.data.date.toISOString()}>{doc.data.date.toLocaleDateString('pt-BR')}</time>
+        <a class="archive-row" href={`${base}acervo/${doc.id}/`} data-search={`${doc.data.title} ${doc.data.originalTitle ?? ''} ${doc.data.category} ${doc.data.archive ?? ''} ${doc.data.reference ?? ''}`.toLowerCase()} data-category={doc.data.category}>
+          <time datetime={doc.data.date.toISOString()}>{formatDate(doc.data.date)}</time>
           <div><span class="card-meta">{doc.data.format} · {doc.data.category}</span><h3>{doc.data.title}</h3><p>{doc.data.description}</p></div>
-          <div class="archive-meta">{doc.data.archive}<br />{doc.data.translationStatus} ↗</div>
+          <div class="archive-meta">
+            {doc.data.archive && <>{doc.data.archive}<br /></>}
+            {doc.data.translationStatus}
+          </div>
         </a>
       ))}
     </div>
