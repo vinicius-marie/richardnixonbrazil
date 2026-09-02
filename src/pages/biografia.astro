@@ -1,40 +1,8 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+import InstitutionalPage from '../components/InstitutionalPage.astro';
+
+const entry = await getEntry('paginas', 'biografia');
+if (!entry) throw new Error('Biografia indisponível.');
 ---
-<BaseLayout title="Biografia" description="A vida de Richard Nixon: origem familiar, formação, campanhas, Presidência e atuação pós-presidencial.">
-  <section class="page-hero">
-    <div class="shell"><p class="kicker light">1913 — 1994</p><h1>Richard Nixon</h1><p>Da Califórnia rural à Casa Branca: formação, ascensão, retorno político, Presidência e duas décadas de influência internacional.</p></div>
-  </section>
-  <section class="section white">
-    <div class="shell prose-shell">
-      <nav class="prose-nav" aria-label="Nesta página"><a href="#origens">Origens</a><a href="#formacao">Formação</a><a href="#ascensao">Ascensão</a><a href="#retorno">Retorno</a><a href="#presidencia">Presidência</a><a href="#ultimos-anos">Últimos anos</a></nav>
-      <article class="prose">
-        <p class="kicker" id="origens">Yorba Linda e Whittier</p>
-        <h2>Uma infância fora das elites.</h2>
-        <p>Richard Milhous Nixon nasceu em 9 de janeiro de 1913, em Yorba Linda, Califórnia. A família vivia do trabalho agrícola e de um pequeno comércio. A infância foi marcada por disciplina religiosa quaker, dificuldades financeiras e pela morte de dois irmãos.</p>
-        <p>As dificuldades familiares, a disciplina quaker e a distância das elites da Costa Leste ajudam a explicar traços recorrentes de sua vida pública: competitividade, autocontrole, ressentimento social e atenção intensa às relações de poder.</p>
-
-        <p class="kicker" id="formacao">Whittier College e Duke</p>
-        <h2>Formação intelectual e jurídica.</h2>
-        <p>Nixon permaneceu próximo da família durante a graduação no Whittier College. Estudou Direito com bolsa na Duke University, formou-se em 1937 e voltou à Califórnia para exercer advocacia. Durante a Segunda Guerra Mundial, serviu na Marinha dos Estados Unidos.</p>
-
-        <p class="kicker" id="ascensao">Congresso, Senado e Vice-Presidência</p>
-        <h2>Uma ascensão acelerada.</h2>
-        <p>Eleito para a Câmara em 1946, ganhou projeção nacional no caso Alger Hiss. Chegou ao Senado em 1950 e, aos 39 anos, foi escolhido por Dwight Eisenhower para a chapa republicana de 1952. Como vice-presidente, viajou extensamente, presidiu reuniões do gabinete e acumulou experiência em política externa.</p>
-
-        <p class="kicker" id="retorno">1960 — 1968</p>
-        <h2>Derrotas e retorno.</h2>
-        <p>A derrota presidencial de 1960 foi uma das mais apertadas da história americana. Dois anos depois, Nixon perdeu a eleição para governador da Califórnia e anunciou que a imprensa não o teria mais como alvo. A carreira parecia encerrada.</p>
-        <blockquote>Entre 1962 e 1968, Nixon reconstruiu sua posição no Partido Republicano e realizou um dos maiores retornos da política americana.</blockquote>
-
-        <p class="kicker" id="presidencia">1969 — 1974</p>
-        <h2>Presidência.</h2>
-        <p>Nixon venceu Hubert Humphrey em 1968 e assumiu a Casa Branca em janeiro de 1969. Seu governo combinou reformas internas, retirada das forças de combate do Vietnã, abertura à China e détente com a União Soviética. Em 1972, conquistou 49 estados, 520 votos no Colégio Eleitoral e mais de 60% do voto popular.</p>
-
-        <p class="kicker" id="ultimos-anos">1974 — 1994</p>
-        <h2>Autor, analista e conselheiro.</h2>
-        <p>Após deixar a Presidência, Nixon publicou livros sobre geopolítica, União Soviética, China, Europa e liderança. Recuperou espaço como analista internacional, realizou novas viagens ao exterior e foi consultado por presidentes republicanos e democratas. Morreu em Nova York, em 22 de abril de 1994.</p>
-      </article>
-    </div>
-  </section>
-</BaseLayout>
+<InstitutionalPage entry={entry} />

@@ -1,0 +1,38 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate } from '../../lib/dates';
+
+export async function getStaticPaths() {
+  const docs = await getCollection('documentos', ({ data }) => !data.draft);
+  return docs.map((document) => ({ params: { slug: document.id }, props: { document } }));
+}
+
+const { document } = Astro.props;
+const { Content } = await render(document);
+const sources = [...new Set([document.data.originalUrl, ...document.data.sources])];
+---
+<BaseLayout title={document.data.title} description={document.data.description ?? `Documento do acervo: ${document.data.title}.`}>
+  <section class="page-hero light">
+    <div class="shell">
+      <p class="kicker">{document.data.format} · {document.data.category}</p>
+      <h1>{document.data.title}</h1>
+      {document.data.originalTitle && <p>{document.data.originalTitle}</p>}
+    </div>
+  </section>
+  <section class="section white">
+    <article class="article-body">
+      <dl class="document-facts">
+        <div><dt>Data</dt><dd>{formatDate(document.data.date)}</dd></div>
+        <div><dt>Arquivo</dt><dd>{document.data.archive ?? 'Não informado'}</dd></div>
+        <div><dt>Referência</dt><dd>{document.data.reference ?? 'Não informada'}</dd></div>
+        <div><dt>Tradução</dt><dd>{document.data.translationStatus}</dd></div>
+      </dl>
+      <Content />
+      <aside class="article-sources">
+        <h2>Original e referências</h2>
+        <ul>{sources.map((source) => <li><a href={source} target="_blank" rel="noreferrer">{source} ↗</a></li>)}</ul>
+      </aside>
+    </article>
+  </section>
+</BaseLayout>

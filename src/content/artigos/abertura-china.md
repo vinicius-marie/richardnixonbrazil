@@ -4,7 +4,7 @@ subtitle: "A visita de 1972 resultou de anos de sinalização, canais reservados
 description: "Como a administração Nixon explorou a ruptura sino-soviética e abriu um relacionamento que alterou a política internacional."
 publishedAt: 2026-07-23
 updatedAt: 2026-07-28
-author: "Nixon Brasil"
+author: "nixonbrazil"
 category: "Política externa"
 cover: "https://commons.wikimedia.org/wiki/Special:Redirect/file/President_Richard_Nixon_and_Mao_Zedong.jpg"
 coverAlt: "Richard Nixon cumprimenta Mao Zedong em Pequim, fevereiro de 1972"

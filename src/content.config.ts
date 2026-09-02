@@ -32,7 +32,7 @@ const artigos = defineCollection({
     description: z.string(),
     publishedAt: z.coerce.date(),
     updatedAt: z.coerce.date().optional(),
-    author: z.string().default('Nixon Brasil'),
+    author: z.string().default('nixonbrazil'),
     category: z.enum([
       'Biografia',
       'Presidência',
@@ -44,7 +44,9 @@ const artigos = defineCollection({
     cover: imageSource.optional(),
     coverAlt: z.string().optional(),
     coverCredit: z.string().optional(),
+    coverRights: z.string().optional(),
     sourceUrl: httpsUrl.optional(),
+    sources: z.array(httpsUrl).default([]),
     homePlacement: z.enum(['lead', 'rail', 'none']).default('none'),
     draft: z.boolean().default(true),
   }).superRefine((article, context) => {
@@ -86,7 +88,20 @@ const documentos = defineCollection({
       'Tradução editorial publicada',
     ]).default('Original em inglês'),
     description: z.string().optional(),
+    sources: z.array(httpsUrl).default([]),
+    draft: z.boolean().default(true),
   }),
 });
 
-export const collections = { artigos, documentos };
+const paginas = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/paginas' }),
+  schema: z.object({
+    title: z.string(),
+    eyebrow: z.string(),
+    description: z.string(),
+    lede: z.string(),
+    updatedAt: z.coerce.date(),
+  }),
+});
+
+export const collections = { artigos, documentos, paginas };

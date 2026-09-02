@@ -8,6 +8,7 @@ archive: "Department of State / FRUS"
 reference: "FRUS 1969–1976, Volume E–10 (Documents on American Republics)"
 originalUrl: "https://history.state.gov/historicaldocuments/frus1969-76ve10"
 translationStatus: "Original em inglês"
+draft: false
 description: "Coleção FRUS com a documentação americana sobre as repúblicas americanas no período, incluindo o tratamento do Brasil como ator regional de peso."
 ---
 

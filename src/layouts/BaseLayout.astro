@@ -25,7 +25,7 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const fullTitle = title === 'Nixon Brasil' ? title : `${title} — Nixon Brasil`;
+const fullTitle = title === 'nixonbrazil' ? title : `${title} — nixonbrazil`;
 const base = import.meta.env.BASE_URL;
 const socialImage = imageAtWidth(image, 1600);
 const contentSecurityPolicy = [
@@ -53,17 +53,17 @@ const structuredData = type === 'article'
       inLanguage: 'pt-BR',
       datePublished: publishedAt?.toISOString(),
       dateModified: (updatedAt ?? publishedAt)?.toISOString(),
-      author: { '@type': 'Organization', name: author ?? 'Nixon Brasil' },
-      publisher: { '@type': 'Organization', name: 'Nixon Brasil' },
+      author: { '@type': 'Organization', name: author ?? 'nixonbrazil' },
+      publisher: { '@type': 'Organization', name: 'nixonbrazil' },
     }
   : {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
-      name: 'Nixon Brasil',
+      name: 'nixonbrazil',
       description,
       url: canonical.toString(),
       inLanguage: 'pt-BR',
-      publisher: { '@type': 'Organization', name: 'Nixon Brasil' },
+      publisher: { '@type': 'Organization', name: 'nixonbrazil' },
     };
 const serializedStructuredData = JSON.stringify(structuredData).replace(/</g, '\\u003c');
 ---
@@ -79,10 +79,10 @@ const serializedStructuredData = JSON.stringify(structuredData).replace(/</g, '\
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
-    <link rel="alternate" type="application/rss+xml" title="Nixon Brasil" href={`${base}rss.xml`} />
+    <link rel="alternate" type="application/rss+xml" title="nixonbrazil" href={`${base}rss.xml`} />
     <meta property="og:type" content={type} />
     <meta property="og:locale" content="pt_BR" />
-    <meta property="og:site_name" content="Nixon Brasil" />
+    <meta property="og:site_name" content="nixonbrazil" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />

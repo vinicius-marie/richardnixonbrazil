@@ -4,7 +4,7 @@ subtitle: "Os acordos de 1972 impuseram regras a partes da competição nuclear 
 description: "SALT I, Tratado ABM e o uso da negociação nuclear pela administração Nixon, com seus resultados e limitações."
 publishedAt: 2026-07-24
 updatedAt: 2026-07-28
-author: "Nixon Brasil"
+author: "nixonbrazil"
 category: "Política externa"
 cover: "https://commons.wikimedia.org/wiki/Special:Redirect/file/President_Richard_Nixon_and_Leonid_Brezhnev_signing_the_SALT_I_agreement.jpg"
 coverAlt: "Nixon e Brezhnev na assinatura dos acordos SALT I, 1972"

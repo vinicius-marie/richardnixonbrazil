@@ -4,7 +4,7 @@ subtitle: "A vitória foi estreita no voto popular, mas encerrou seis anos de re
 description: "A campanha de 1968, a coalizão eleitoral de Nixon e a origem posterior da expressão “maioria silenciosa”."
 publishedAt: 2026-07-24
 updatedAt: 2026-07-28
-author: "Nixon Brasil"
+author: "nixonbrazil"
 category: "Presidência"
 cover: "https://commons.wikimedia.org/wiki/Special:Redirect/file/NIXONcampaigns.jpg"
 coverAlt: "Richard Nixon em campanha em 1968"

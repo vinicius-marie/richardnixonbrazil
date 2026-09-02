@@ -8,6 +8,7 @@ archive: "U.S. Environmental Protection Agency"
 reference: "EPA History — Origins of EPA"
 originalUrl: "https://www.epa.gov/history/origins-epa"
 translationStatus: "Original em inglês"
+draft: false
 description: "Narrativa institucional da criação da EPA em 1970, reorganizando funções federais de meio ambiente sob uma agência única."
 ---
 

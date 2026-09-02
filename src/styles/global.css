@@ -375,6 +375,28 @@ select:focus-visible {
 .archive-row p { margin: 4px 0 0; color: var(--muted); }
 .archive-row:hover h3 { color: var(--red); }
 
+.document-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0 0 46px;
+  border-top: 1px solid var(--navy);
+  border-left: 1px solid var(--navy);
+}
+.document-facts div {
+  border-right: 1px solid var(--navy);
+  border-bottom: 1px solid var(--navy);
+  padding: 17px;
+}
+.document-facts dt {
+  color: var(--red);
+  font-family: var(--sans);
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.document-facts dd { margin: 5px 0 0; }
+
 .article-header {
   max-width: 980px;
   margin: 0 auto;
@@ -590,6 +612,7 @@ select:focus-visible {
   .article-deck { font-size: 1.08rem; }
   .article-cover { margin-bottom: 38px; }
   .article-body { padding-bottom: 68px; font-size: 1.05rem; }
+  .document-facts { grid-template-columns: 1fr; }
   .subscribe-url { grid-template-columns: 1fr; }
   .btn { width: 100%; }
   .footer-bottom { flex-direction: column; }

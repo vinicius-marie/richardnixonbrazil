@@ -10,7 +10,7 @@ const articles = (await getCollection('artigos', ({ data }) => !data.draft))
     || a.id.localeCompare(b.id, 'pt-BR')
   ));
 ---
-<BaseLayout title="Artigos" description="Ensaios, dossiês e traduções do Nixon Brasil.">
+<BaseLayout title="Artigos" description="Ensaios, dossiês e traduções do nixonbrazil.">
   <section class="page-hero light">
     <div class="shell"><p class="kicker">Publicação editorial</p><h1>Artigos</h1><p>Biografia, Presidência, política externa, Brasil, discursos e fontes primárias.</p></div>
   </section>
