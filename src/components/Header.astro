@@ -1,15 +1,9 @@
 ---
+import site from '../data/site.json';
+
 const base = import.meta.env.BASE_URL;
 const path = Astro.url.pathname;
-const links = [
-  ['Biografia', 'biografia/'],
-  ['Presidência', 'presidencia/'],
-  ['Política externa', 'politica-externa/'],
-  ['Brasil', 'brasil/'],
-  ['Acervo', 'acervo/'],
-  ['Artigos', 'artigos/'],
-  ['Vídeos', 'videos/'],
-];
+const links = site.navigation.map(({ label, url }) => [label, url.replace(/^\//, '')]);
 
 const active = (href: string) => path === `${base}${href}` || path.startsWith(`${base}${href}`);
 ---
@@ -17,7 +11,7 @@ const active = (href: string) => path === `${base}${href}` || path.startsWith(`$
   <div class="shell nav-row">
     <a class="wordmark" href={base} aria-label="Nixon Brasil, início">
       <strong>NIXON BRASIL</strong>
-      <span>O legado de Richard Nixon em português</span>
+      <span>História e documentos, em português</span>
     </a>
     <nav class="main-nav desktop-nav" aria-label="Navegação principal">
       {links.map(([label, href]) => (

@@ -32,14 +32,14 @@ const contentSecurityPolicy = [
   "default-src 'self'",
   "base-uri 'self'",
   "connect-src 'self'",
-  "font-src 'self' https://fonts.gstatic.com",
+  "font-src 'self'",
   "form-action 'self'",
   "frame-src 'none'",
   "img-src 'self' https://commons.wikimedia.org https://upload.wikimedia.org",
   "media-src 'none'",
   "object-src 'none'",
   "script-src 'self'",
-  "style-src 'self' https://fonts.googleapis.com",
+  "style-src 'self'",
   'upgrade-insecure-requests',
 ].join('; ');
 const structuredData = type === 'article'
@@ -79,9 +79,7 @@ const serializedStructuredData = JSON.stringify(structuredData).replace(/</g, '\
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Caslon+Display&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+    <link rel="alternate" type="application/rss+xml" title="Nixon Brasil" href={`${base}rss.xml`} />
     <meta property="og:type" content={type} />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="Nixon Brasil" />

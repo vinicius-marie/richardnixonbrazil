@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { imageAtWidth, imageSrcset } from '../lib/images';
+import { formatDate } from '../lib/dates';
+import site from '../data/site.json';
 import '../styles/home.css';
 
 const base = import.meta.env.BASE_URL;
@@ -15,7 +17,9 @@ const lead = articles.find((article) => article.data.homePlacement === 'lead') ?
 const rail = articles
   .filter((article) => article.id !== lead?.id && article.data.homePlacement === 'rail')
   .slice(0, 4);
-const heroImage = 'https://commons.wikimedia.org/wiki/Special:Redirect/file/NIXONcampaigns.jpg';
+const { home } = site;
+const heroImage = home.heroImage;
+const internalUrl = (path: string) => `${base}${path.replace(/^\//, '')}`;
 
 function coverOf(article: (typeof articles)[number]) {
   const raw = article.data.cover ?? '';
@@ -25,7 +29,7 @@ function coverOf(article: (typeof articles)[number]) {
 ---
 <BaseLayout
   title="Nixon Brasil"
-  description="O legado de Richard Nixon em português: Presidência, diplomacia, realizações, documentos e relações com o Brasil."
+  description="História política e documentos sobre Richard Nixon, sua Presidência e as relações entre Estados Unidos e Brasil."
 >
   <section class="hero">
     <img
@@ -33,7 +37,7 @@ function coverOf(article: (typeof articles)[number]) {
       src={imageAtWidth(heroImage, 1600)}
       srcset={imageSrcset(heroImage, [640, 960, 1280, 1600])}
       sizes="100vw"
-      alt="Richard Nixon em campanha diante de uma multidão em 1968"
+      alt={home.heroAlt}
       width="1600"
       height="900"
       fetchpriority="high"
@@ -41,21 +45,18 @@ function coverOf(article: (typeof articles)[number]) {
     />
     <div class="hero-content">
       <div class="hero-copy">
-        <p class="kicker light">1913 — 1994 · 37º presidente dos Estados Unidos</p>
-        <h1>O legado de Richard Nixon, em português.</h1>
-        <p class="hero-lead">
-          Artigos e fontes primárias sobre Presidência, diplomacia, reformas e
-          relações com o Brasil.
-        </p>
+        <p class="kicker light">{home.eyebrow}</p>
+        <h1>{home.title}</h1>
+        <p class="hero-lead">{home.introduction}</p>
         <div class="actions">
-          <a class="btn primary" href={`${base}presidencia/`}>Presidência</a>
-          <a class="btn ghost" href={`${base}acervo/`}>Acervo</a>
+          <a class="btn primary" href={internalUrl(home.primaryUrl)}>{home.primaryLabel}</a>
+          <a class="btn ghost" href={internalUrl(home.secondaryUrl)}>{home.secondaryLabel}</a>
         </div>
       </div>
     </div>
     <div class="hero-note">
       <div class="shell">
-        <span>Fotografia: Ollie Atkins / NARA · domínio público</span>
+        <span>Fotografia: {home.heroCredit}</span>
       </div>
     </div>
   </section>
@@ -73,7 +74,7 @@ function coverOf(article: (typeof articles)[number]) {
             {coverOf(lead)
               ? <img src={imageAtWidth(coverOf(lead), 1280)} srcset={imageSrcset(coverOf(lead), [640, 960, 1280])} sizes="(max-width: 900px) calc(100vw - 24px), 65vw" alt={lead.data.coverAlt ?? ''} width="1200" height="675" loading="lazy" decoding="async" />
               : <div class="card-cover-fallback lead-fallback" aria-hidden="true">{lead.data.category}</div>}
-            <span class="card-meta">{lead.data.category} · {lead.data.publishedAt.toLocaleDateString('pt-BR')}</span>
+            <span class="card-meta">{lead.data.category} · {formatDate(lead.data.publishedAt)}</span>
             <h3>{lead.data.title}</h3>
             <p>{lead.data.subtitle ?? lead.data.description}</p>
           </a>

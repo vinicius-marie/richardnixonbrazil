@@ -10,8 +10,8 @@ const requiredRoutes = [
   'dist/brasil/index.html',
   'dist/acervo/index.html',
   'dist/artigos/index.html',
-  'dist/videos/index.html',
   'dist/sobre/index.html',
+  'dist/assinar/index.html',
   'dist/404.html',
   'dist/rss.xml',
   'dist/sitemap.xml',
@@ -42,6 +42,7 @@ const [
   workflow,
   contentConfig,
   articleNames,
+  siteSettings,
 ] = await Promise.all([
   readFile('src/components/Header.astro', 'utf8'),
   readFile('astro.config.mjs', 'utf8'),
@@ -53,6 +54,7 @@ const [
   readFile('.github/workflows/pages.yml', 'utf8'),
   readFile('src/content.config.ts', 'utf8'),
   readdir('src/content/artigos'),
+  readFile('src/data/site.json', 'utf8'),
 ]);
 
 if (!config.includes("site: 'https://nixonbrazil.page'")) {
@@ -74,7 +76,11 @@ if (!mobileHero || !homeCss.includes('.hero { min-height: 0; }')) {
   throw new Error('A fotografia e o texto do hero devem ocupar zonas separadas no celular.');
 }
 
-if (workflow.includes('workflow_dispatch:') || !workflow.includes("if: github.event_name == 'push' && github.ref == 'refs/heads/main'")) {
+if (
+  workflow.includes('workflow_dispatch:')
+  || !workflow.includes("if: github.event_name == 'push' && github.ref == 'refs/heads/main'")
+  || !workflow.includes('npm ci --ignore-scripts --no-audit --no-fund')
+) {
   throw new Error('A publicação deve ocorrer exclusivamente após push na main.');
 }
 
@@ -94,15 +100,25 @@ if (!cms.includes('name: homePlacement') || !pageSource.includes("homePlacement 
   throw new Error('A posição dos artigos na página inicial não está ligada ao CMS.');
 }
 
+const parsedSiteSettings = JSON.parse(siteSettings);
+if (!Array.isArray(parsedSiteSettings.navigation) || parsedSiteSettings.navigation.length < 4) {
+  throw new Error('O menu editável do site está ausente ou vazio.');
+}
+
 const articleSources = await Promise.all(
   articleNames
     .filter((name) => extname(name) === '.md')
     .map((name) => readFile(join('src/content/artigos', name), 'utf8')),
 );
-
 const leadCount = articleSources.filter((source) => source.includes('homePlacement: "lead"')).length;
 if (leadCount !== 1) {
   throw new Error(`A página inicial precisa de uma matéria principal; foram encontradas ${leadCount}.`);
+}
+
+for (const [index, name] of articleNames.filter((entry) => extname(entry) === '.md').entries()) {
+  if (articleSources[index].includes('draft: false')) {
+    await access(join('dist/artigos', name.replace(/\.md$/, ''), 'index.html'), constants.R_OK);
+  }
 }
 
 const generatedFiles = await filesIn('dist');
@@ -123,6 +139,9 @@ for (const file of htmlFiles) {
   }
   if (!/<link rel="canonical" href="https:\/\/nixonbrazil\.page\//.test(html)) {
     throw new Error(`URL canônica incorreta: ${file}`);
+  }
+  if (!html.includes('rel="alternate" type="application/rss+xml"') || html.includes('fonts.googleapis.com')) {
+    throw new Error(`RSS ou política de fontes incorreta: ${file}`);
   }
   if (html.includes('viniciusdaniel-law.github.io/nixon-brasil')) {
     throw new Error(`Endereço antigo encontrado: ${file}`);
@@ -172,4 +191,10 @@ for (const file of htmlFiles) {
   }
 }
 
-console.log(`Site verificado: ${htmlFiles.length} páginas, domínio, navegação, metadados e seleção editorial.`);
+for (const route of ['videos', 'cronologia', 'discursos', 'pessoas', 'temas', 'galerias']) {
+  if (generatedFiles.some((file) => file.startsWith(`dist/${route}/`))) {
+    throw new Error(`Seção sem acervo suficiente foi publicada: ${route}.`);
+  }
+}
+
+console.log(`Site verificado: ${htmlFiles.length} páginas, feed, metadados e navegação.`);

@@ -2,7 +2,7 @@ import { getCollection } from 'astro:content';
 
 export async function GET({ site }: { site: URL }) {
   const base = import.meta.env.BASE_URL;
-  const staticRoutes = ['', 'biografia/', 'presidencia/', 'politica-externa/', 'brasil/', 'acervo/', 'artigos/', 'videos/', 'sobre/'];
+  const staticRoutes = ['', 'biografia/', 'presidencia/', 'politica-externa/', 'brasil/', 'acervo/', 'artigos/', 'sobre/', 'assinar/'];
   const articles = (await getCollection('artigos', ({ data }) => !data.draft))
     .sort((a, b) => a.id.localeCompare(b.id, 'pt-BR'));
   const urls = [

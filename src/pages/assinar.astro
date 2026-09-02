@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const feed = new URL('rss.xml', Astro.site).toString();
+const base = import.meta.env.BASE_URL;
+---
+<BaseLayout title="Assinar atualizações" description="Como acompanhar os novos artigos do Nixon Brasil por RSS.">
+  <section class="page-hero light">
+    <div class="shell">
+      <p class="kicker">RSS</p>
+      <h1>Assinar atualizações</h1>
+      <p>O feed informa a publicação de novos artigos sem exigir conta, e-mail ou aplicativo específico.</p>
+    </div>
+  </section>
+  <section class="section white">
+    <div class="shell subscribe-box">
+      <h2>Copie o endereço no seu leitor de feeds</h2>
+      <div class="subscribe-url">
+        <input id="feed-url" type="url" value={feed} readonly aria-label="Endereço do feed RSS" />
+        <button id="copy-feed" class="btn dark" type="button">Copiar endereço</button>
+      </div>
+      <p class="subscribe-note">O arquivo XML é destinado ao leitor de RSS. Se precisar inspecioná-lo, <a href={`${base}rss.xml`}>abra o feed técnico</a>.</p>
+    </div>
+  </section>
+  <script is:inline src={`${base}scripts/assinar.js`} defer></script>
+</BaseLayout>

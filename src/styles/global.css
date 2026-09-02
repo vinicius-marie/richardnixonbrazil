@@ -8,9 +8,9 @@
   --ink: #17202c;
   --muted: #5a6370;
   --line: #c9c5bb;
-  --sans: 'DM Sans', system-ui, sans-serif;
-  --display: 'Libre Caslon Display', Georgia, serif;
-  --text: 'Source Serif 4', Georgia, serif;
+  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --text: Charter, "Bitstream Charter", "Iowan Old Style", Georgia, serif;
   --shell: min(1220px, calc(100vw - 48px));
   --reading: min(760px, calc(100vw - 40px));
 }
@@ -281,8 +281,7 @@ select:focus-visible {
   line-height: 1.3;
 }
 .prose a,
-.article-body a,
-.videos-status a:not(.btn) {
+.article-body a {
   color: var(--blue);
   text-decoration: underline;
   text-decoration-thickness: 1px;
@@ -450,17 +449,29 @@ select:focus-visible {
 }
 .article-sources h2 { margin-top: 0; font-size: 1.75rem; }
 .article-sources ul { margin: 0; padding-left: 1.1rem; }
+.article-sources a { overflow-wrap: anywhere; }
 
-.videos-status { max-width: 740px; }
-.videos-status h2 {
-  margin: 0 0 18px;
-  color: var(--navy);
-  font-family: var(--display);
-  font-size: clamp(2.2rem, 5vw, 3.2rem);
-  font-weight: 400;
-  line-height: 1.06;
+.subscribe-box {
+  display: grid;
+  max-width: 760px;
+  gap: 18px;
+  border-top: 1px solid var(--navy);
+  padding-top: 30px;
 }
-.videos-status > p { color: var(--muted); font-size: 1.12rem; }
+.subscribe-url {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+}
+.subscribe-url input {
+  min-width: 0;
+  border: 1px solid var(--navy);
+  background: var(--surface);
+  padding: 12px 14px;
+  color: var(--ink);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+.subscribe-note { color: var(--muted); }
 .site-footer {
   background: #05162c;
   color: white;
@@ -579,6 +590,7 @@ select:focus-visible {
   .article-deck { font-size: 1.08rem; }
   .article-cover { margin-bottom: 38px; }
   .article-body { padding-bottom: 68px; font-size: 1.05rem; }
+  .subscribe-url { grid-template-columns: 1fr; }
   .btn { width: 100%; }
   .footer-bottom { flex-direction: column; }
 }

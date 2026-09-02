@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate } from '../../lib/dates';
 
 const base = import.meta.env.BASE_URL;
 const articles = (await getCollection('artigos', ({ data }) => !data.draft))
@@ -24,7 +25,7 @@ const articles = (await getCollection('artigos', ({ data }) => !data.draft))
             ? <img src={cover} alt={article.data.coverAlt ?? ''} width="640" height="360" loading="lazy" decoding="async" />
             : <div class="card-cover-fallback" aria-hidden="true">{article.data.category}</div>}
           <div class="card-body">
-            <span class="card-meta">{article.data.category} · {article.data.publishedAt.toLocaleDateString('pt-BR')}</span>
+            <span class="card-meta">{article.data.category} · {formatDate(article.data.publishedAt)}</span>
             <h2>{article.data.title}</h2>
             <p>{article.data.description}</p>
           </div>

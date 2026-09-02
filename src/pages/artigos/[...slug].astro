@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { imageAtWidth, imageSrcset } from '../../lib/images';
+import { formatDate } from '../../lib/dates';
 
 export async function getStaticPaths() {
   const articles = await getCollection('artigos', ({ data }) => !data.draft);
@@ -34,7 +35,7 @@ const minutes = Math.max(1, Math.round(words / 220));
       {article.data.subtitle && <p class="article-deck">{article.data.subtitle}</p>}
       <div class="article-meta-row">
         <span>{article.data.author}</span>
-        <span>{article.data.publishedAt.toLocaleDateString('pt-BR')}</span>
+        <span>{formatDate(article.data.publishedAt)}</span>
         <span>{minutes} min de leitura</span>
       </div>
     </header>

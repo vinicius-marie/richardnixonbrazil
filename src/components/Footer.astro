@@ -1,11 +1,13 @@
 ---
+import site from '../data/site.json';
+
 const base = import.meta.env.BASE_URL;
 ---
 <footer class="site-footer">
   <div class="shell footer-grid">
     <div>
       <strong>NIXON BRASIL</strong>
-      <p>Preservação e divulgação do legado de Richard Nixon em português.</p>
+      <p>{site.footerDescription}</p>
     </div>
     <div>
       <span>Explorar</span>
@@ -18,8 +20,7 @@ const base = import.meta.env.BASE_URL;
       <span>Publicação</span>
       <a href={`${base}artigos/`}>Artigos</a>
       <a href={`${base}acervo/`}>Acervo</a>
-      <a href={`${base}videos/`}>Vídeos</a>
-      <a href={`${base}rss.xml`}>RSS</a>
+      <a href={`${base}assinar/`}>Assinar atualizações</a>
     </div>
     <div>
       <span>Fontes-base</span>
