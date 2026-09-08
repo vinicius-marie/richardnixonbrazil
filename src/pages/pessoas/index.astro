@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { imageAtWidth } from '../../lib/images';
+
+const base = import.meta.env.BASE_URL;
+const people = (await getCollection('pessoas', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.name.localeCompare(b.data.name, 'pt-BR'));
+---
+<BaseLayout title="Pessoas" description="Perfis de dirigentes, diplomatas e assessores relacionados à trajetória e à administração Nixon.">
+  <section class="page-hero light"><div class="shell"><p class="kicker">Índice biográfico</p><h1>Pessoas</h1><p>Perfis breves ligados ao arquivo e aos dossiês do Nixon Brasil.</p></div></section>
+  <section class="section"><div class="shell cards">
+    {people.map((person) => (
+      <a class="card" href={`${base}pessoas/${person.id}/`}>
+        {person.data.cover ? <img src={imageAtWidth(person.data.cover, 640)} alt={person.data.coverAlt ?? ''} width="640" height="360" loading="lazy" decoding="async" /> : <div class="card-cover-fallback" aria-hidden="true">{person.data.lifespan ?? 'Perfil'}</div>}
+        <div class="card-body"><span class="card-meta">{person.data.role}</span><h2>{person.data.name}</h2><p>{person.data.description}</p></div>
+      </a>
+    ))}
+  </div></section>
+</BaseLayout>

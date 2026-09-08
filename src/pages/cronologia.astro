@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { formatDate } from '../lib/dates';
+
+const events = (await getCollection('cronologia', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+---
+<BaseLayout title="Cronologia" description="Cronologia documental da vida, das campanhas, da Presidência e da atuação posterior de Richard Nixon.">
+  <section class="page-hero light"><div class="shell"><p class="kicker">1913–1994</p><h1>Cronologia</h1><p>Marcos biográficos e políticos ligados diretamente a fontes de referência.</p></div></section>
+  <section class="section"><div class="shell timeline">
+    {events.map((event) => (
+      <article class="timeline-entry">
+        <time datetime={event.data.date.toISOString()}>{formatDate(event.data.date)}</time>
+        <div><span class="card-meta">{event.data.category}</span><h2>{event.data.title}</h2><p>{event.data.summary}</p></div>
+        <a href={event.data.sourceUrl} target="_blank" rel="noreferrer">Fonte ↗</a>
+      </article>
+    ))}
+  </div></section>
+</BaseLayout>

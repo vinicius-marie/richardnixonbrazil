@@ -1,0 +1,15 @@
+---
+import { getCollection, render } from 'astro:content';
+import EditorialEntry from '../../components/EditorialEntry.astro';
+
+export async function getStaticPaths() {
+  const themes = await getCollection('temas', ({ data }) => !data.draft);
+  return themes.map((theme) => ({ params: { slug: theme.id }, props: { theme } }));
+}
+
+const { theme } = Astro.props;
+const { Content } = await render(theme);
+---
+<EditorialEntry title={theme.data.title} eyebrow="Dossiê temático" description={theme.data.description} sourceUrl={theme.data.sourceUrl}>
+  <Content />
+</EditorialEntry>

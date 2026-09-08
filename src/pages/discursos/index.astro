@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate } from '../../lib/dates';
+
+const base = import.meta.env.BASE_URL;
+const speeches = (await getCollection('discursos', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<BaseLayout title="Discursos" description="Discursos de Richard Nixon catalogados com data, contexto, fonte e situação da tradução.">
+  <section class="page-hero light"><div class="shell"><p class="kicker">Texto e contexto</p><h1>Discursos</h1><p>Pronunciamentos selecionados com referência original e nota editorial.</p></div></section>
+  <section class="section"><div class="shell cards">
+    {speeches.map((speech) => (
+      <a class="card text-card" href={`${base}discursos/${speech.id}/`}><div class="card-body"><span class="card-meta">{formatDate(speech.data.date)} · {speech.data.translationStatus}</span><h2>{speech.data.title}</h2><p>{speech.data.description}</p></div></a>
+    ))}
+  </div></section>
+</BaseLayout>

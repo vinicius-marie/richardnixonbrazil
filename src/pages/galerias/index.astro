@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { imageAtWidth } from '../../lib/images';
+import { formatDate } from '../../lib/dates';
+
+const base = import.meta.env.BASE_URL;
+const galleries = (await getCollection('galerias', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<BaseLayout title="Galerias" description="Ensaios visuais e fotografias históricas com identificação, crédito e fonte de arquivo.">
+  <section class="page-hero light"><div class="shell"><p class="kicker">Arquivo visual</p><h1>Galerias</h1><p>Imagens documentadas, não decoração: data, autoria, contexto e origem.</p></div></section>
+  <section class="section"><div class="shell cards">
+    {galleries.map((gallery) => <a class="card" href={`${base}galerias/${gallery.id}/`}><img src={imageAtWidth(gallery.data.cover, 640)} alt={gallery.data.coverAlt} width="640" height="360" loading="lazy" decoding="async" /><div class="card-body"><span class="card-meta">{formatDate(gallery.data.date)}</span><h2>{gallery.data.title}</h2><p>{gallery.data.description}</p></div></a>)}
+  </div></section>
+</BaseLayout>

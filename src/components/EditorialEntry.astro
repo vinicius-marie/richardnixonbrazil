@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface Props {
+  title: string;
+  eyebrow: string;
+  description: string;
+  lede?: string;
+  sourceUrl: string;
+}
+
+const { title, eyebrow, description, lede = description, sourceUrl } = Astro.props;
+---
+<BaseLayout title={title} description={description}>
+  <section class="page-hero light">
+    <div class="shell">
+      <p class="kicker">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p>{lede}</p>
+    </div>
+  </section>
+  <section class="section white">
+    <article class="article-body standalone-entry">
+      <slot />
+      <aside class="article-sources">
+        <h2>Fonte de referência</h2>
+        <ul><li><a href={sourceUrl} target="_blank" rel="noreferrer">Consultar a fonte original ↗</a></li></ul>
+      </aside>
+    </article>
+  </section>
+</BaseLayout>

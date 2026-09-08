@@ -1,0 +1,18 @@
+---
+import { getCollection, render } from 'astro:content';
+import EditorialEntry from '../../components/EditorialEntry.astro';
+import { imageAtWidth } from '../../lib/images';
+import { formatDate } from '../../lib/dates';
+
+export async function getStaticPaths() {
+  const galleries = await getCollection('galerias', ({ data }) => !data.draft);
+  return galleries.map((gallery) => ({ params: { slug: gallery.id }, props: { gallery } }));
+}
+
+const { gallery } = Astro.props;
+const { Content } = await render(gallery);
+---
+<EditorialEntry title={gallery.data.title} eyebrow={formatDate(gallery.data.date)} description={gallery.data.description} sourceUrl={gallery.data.sourceUrl}>
+  <figure class="article-cover inline-cover"><img src={imageAtWidth(gallery.data.cover, 1280)} alt={gallery.data.coverAlt} width="1200" height="675" /><figcaption>{gallery.data.coverCredit}</figcaption></figure>
+  <Content />
+</EditorialEntry>

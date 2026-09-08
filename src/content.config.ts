@@ -89,6 +89,8 @@ const documentos = defineCollection({
     ]).default('Original em inglês'),
     description: z.string().optional(),
     sources: z.array(httpsUrl).default([]),
+    people: z.array(z.string()).default([]),
+    themes: z.array(z.string()).default([]),
     draft: z.boolean().default(true),
   }),
 });
@@ -101,7 +103,84 @@ const paginas = defineCollection({
     description: z.string(),
     lede: z.string(),
     updatedAt: z.coerce.date(),
+    draft: z.boolean().default(false),
   }),
 });
 
-export const collections = { artigos, documentos, paginas };
+const cronologia = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/cronologia' }),
+  schema: z.object({
+    date: z.coerce.date(),
+    title: z.string(),
+    summary: z.string(),
+    category: z.enum(['Biografia', 'Campanhas', 'Presidência', 'Política externa', 'Pós-Presidência']),
+    sourceUrl: httpsUrl,
+    draft: z.boolean().default(true),
+  }),
+});
+
+const discursos = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/discursos' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    occasion: z.string(),
+    description: z.string(),
+    originalUrl: httpsUrl,
+    translationStatus: z.enum(['Original em inglês', 'Tradução em preparação', 'Tradução editorial publicada']),
+    draft: z.boolean().default(true),
+  }),
+});
+
+const pessoas = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/pessoas' }),
+  schema: z.object({
+    name: z.string(),
+    role: z.string(),
+    lifespan: z.string().optional(),
+    description: z.string(),
+    cover: imageSource.optional(),
+    coverAlt: z.string().optional(),
+    sourceUrl: httpsUrl,
+    draft: z.boolean().default(true),
+  }).superRefine((person, context) => {
+    if (person.cover && !person.coverAlt?.trim()) {
+      context.addIssue({ code: 'custom', path: ['coverAlt'], message: 'Informe o texto alternativo da imagem.' });
+    }
+  }),
+});
+
+const temas = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/temas' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    sourceUrl: httpsUrl,
+    draft: z.boolean().default(true),
+  }),
+});
+
+const galerias = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/galerias' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    description: z.string(),
+    cover: imageSource,
+    coverAlt: z.string(),
+    coverCredit: z.string(),
+    sourceUrl: httpsUrl,
+    draft: z.boolean().default(true),
+  }),
+});
+
+export const collections = {
+  artigos,
+  documentos,
+  paginas,
+  cronologia,
+  discursos,
+  pessoas,
+  temas,
+  galerias,
+};

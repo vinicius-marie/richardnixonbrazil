@@ -1,0 +1,16 @@
+---
+import { getCollection, render } from 'astro:content';
+import EditorialEntry from '../../components/EditorialEntry.astro';
+import { formatDate } from '../../lib/dates';
+
+export async function getStaticPaths() {
+  const speeches = await getCollection('discursos', ({ data }) => !data.draft);
+  return speeches.map((speech) => ({ params: { slug: speech.id }, props: { speech } }));
+}
+
+const { speech } = Astro.props;
+const { Content } = await render(speech);
+---
+<EditorialEntry title={speech.data.title} eyebrow={`${formatDate(speech.data.date)} · ${speech.data.occasion}`} description={speech.data.description} sourceUrl={speech.data.originalUrl}>
+  <Content />
+</EditorialEntry>
