@@ -124,7 +124,7 @@ select:focus-visible {
 }
 
 .page-hero {
-  padding: 78px 0 68px;
+  padding: 60px 0 52px;
   background: var(--navy);
   color: white;
 }
@@ -143,8 +143,8 @@ select:focus-visible {
   line-height: 1.04;
 }
 .page-hero h1 {
-  margin: 12px 0 18px;
-  font-size: clamp(2.7rem, 5vw, 4.5rem);
+  margin: 10px 0 14px;
+  font-size: clamp(2.4rem, 4.6vw, 3.9rem);
 }
 .page-hero p {
   max-width: 760px;
@@ -168,7 +168,7 @@ select:focus-visible {
 }
 .kicker.light { color: #e4c7ca; }
 .card-meta { color: var(--red); }
-.section { padding: 88px 0; }
+.section { padding: 72px 0; }
 .section.white { background: var(--surface); }
 .section.navy { background: var(--navy); color: white; }
 .section-head {
@@ -329,11 +329,18 @@ select:focus-visible {
 .card h3 {
   margin: 0;
   font-family: var(--display);
-  font-size: 1.9rem;
+  font-size: 1.55rem;
   font-weight: 400;
-  line-height: 1.08;
+  line-height: 1.12;
 }
-.card p { margin: 0; color: var(--muted); }
+.card p {
+  margin: 0;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
 .archive-toolbar {
   display: grid;
@@ -372,7 +379,14 @@ select:focus-visible {
   font-weight: 400;
   line-height: 1.12;
 }
-.archive-row p { margin: 4px 0 0; color: var(--muted); }
+.archive-row p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 .archive-row:hover h3 { color: var(--red); }
 
 .document-facts {

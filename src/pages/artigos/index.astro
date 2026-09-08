@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatDate } from '../../lib/dates';
+import { imageAtWidth, imageSrcset } from '../../lib/images';
 
 const base = import.meta.env.BASE_URL;
 const articles = (await getCollection('artigos', ({ data }) => !data.draft))
@@ -12,7 +13,7 @@ const articles = (await getCollection('artigos', ({ data }) => !data.draft))
 ---
 <BaseLayout title="Artigos" description="Ensaios, dossiês e traduções do nixonbrazil.">
   <section class="page-hero light">
-    <div class="shell"><p class="kicker">Publicação editorial</p><h1>Artigos</h1><p>Biografia, Presidência, política externa, Brasil, discursos e fontes primárias.</p></div>
+    <div class="shell"><p class="kicker">Publicação editorial</p><h1>Artigos</h1><p>Ensaios sobre a Presidência, a diplomacia e as relações com o Brasil.</p></div>
   </section>
   <section class="section">
     <div class="shell cards">
@@ -22,7 +23,7 @@ const articles = (await getCollection('artigos', ({ data }) => !data.draft))
         return (
         <a class="card" href={`${base}artigos/${article.id}/`}>
           {cover
-            ? <img src={cover} alt={article.data.coverAlt ?? ''} width="640" height="360" loading="lazy" decoding="async" />
+            ? <img src={imageAtWidth(cover, 640)} srcset={imageSrcset(cover, [480, 640, 960])} sizes="(max-width: 700px) calc(100vw - 24px), (max-width: 1100px) 45vw, 380px" alt={article.data.coverAlt ?? ''} width="640" height="360" loading="lazy" decoding="async" />
             : <div class="card-cover-fallback" aria-hidden="true">{article.data.category}</div>}
           <div class="card-body">
             <span class="card-meta">{article.data.category} · {formatDate(article.data.publishedAt)}</span>

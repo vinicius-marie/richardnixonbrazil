@@ -66,7 +66,7 @@
   text-transform: uppercase;
 }
 
-.home-feature { padding: 72px 0 82px; }
+.home-feature { padding: 56px 0 64px; }
 .home-index-section { padding-top: 0; }
 .editorial-head {
   display: flex;
@@ -121,6 +121,10 @@
   margin: 0;
   color: var(--muted);
   font-size: 1.06rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .lead-story:hover h3,
 .compact-story:hover h3,
@@ -129,17 +133,16 @@
 .compact-story {
   display: block;
   border-bottom: 1px solid var(--line);
-  padding: 17px 0;
+  padding: 14px 0;
 }
 .compact-story h3 {
-  margin: 5px 0 4px;
+  margin: 5px 0 0;
   color: var(--navy);
   font-family: var(--display);
-  font-size: 1.28rem;
+  font-size: 1.22rem;
   font-weight: 400;
-  line-height: 1.18;
+  line-height: 1.2;
 }
-.compact-story p { margin: 0; color: var(--muted); font-size: .94rem; }
 
 .index-list { border-top: 2px solid var(--navy); }
 .index-row {

@@ -6,8 +6,8 @@ publishedAt: 2026-07-24
 updatedAt: 2026-08-04
 author: "nixonbrazil"
 category: "Política externa"
-cover: "https://commons.wikimedia.org/wiki/Special:Redirect/file/President_Richard_Nixon_and_Leonid_Brezhnev_signing_the_SALT_I_agreement.jpg"
-coverAlt: "Nixon e Brezhnev na assinatura dos acordos SALT I, 1972"
+cover: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Richard_Nixon_and_Leonid_Brezhnev_sign_ABM_treaty_and_SALT_agreement_in_Moscow.jpg"
+coverAlt: "Nixon e Brezhnev assinam o Tratado ABM e o acordo SALT I em Moscou, 26 de maio de 1972"
 coverCredit: "White House Photo Office / NARA · domínio público (via Wikimedia)"
 sourceUrl: "https://history.state.gov/historicaldocuments/frus1969-76v32"
 homePlacement: "rail"
