@@ -29,9 +29,9 @@ npm run build
 git diff --check
 ```
 
-O build verifica tipos, rotas, links internos, metadados, feed, rascunhos, maturidade editorial e configuração. Uma PR baseada em branch histórica (`artigo/*`, `revisao/*`, `copilot/*`, etc.) deve falhar no preflight `scripts/check-branch-authority.mjs`.
+O build verifica tipos, rotas, links internos, metadados, feed, rascunhos, maturidade editorial e configuração. Uma PR baseada em branch histórica deve falhar no preflight `scripts/check-branch-authority.mjs`.
 
-Crie a branch de trabalho **a partir de `origin/main`**. Não continue uma branch antiga só porque o nome parece relevante. Ver [AGENTS.md](../AGENTS.md).
+Crie a branch de trabalho a partir de `origin/main`. Não continue uma branch antiga apenas porque o nome parece relevante. As invariantes operacionais estão em [AGENTS.md](../AGENTS.md).
 
 ## Alterações de conteúdo
 
@@ -55,7 +55,7 @@ Uma seção pública só deve ser criada quando houver conteúdo suficiente para
 4. acrescente uma verificação em `scripts/verify-site.mjs`;
 5. teste em tela pequena e larga.
 
-Cronologia, perfis, temas e galerias não devem ser expostos apenas para preencher uma taxonomia. A PR #28 recupera essas coleções em quarentena; republicá-las exige segundo gate editorial e alteração explícita do verificador.
+Cronologia, perfis, temas e galerias não devem ser expostos apenas para preencher uma taxonomia. A publicação dessas coleções exige conteúdo revisado, fontes adequadas e alteração editorial explícita do verificador.
 
 ## Publicação e reversão
 
