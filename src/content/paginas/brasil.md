@@ -3,7 +3,7 @@ title: "Nixon e o Brasil"
 eyebrow: "Relações bilaterais · 1969–1974"
 description: "Comércio, ditadura, mar territorial e estratégia nas relações entre a administração Nixon e o governo Médici."
 lede: "Documentos americanos registram consulta presidencial e cooperação, mas também assimetria, atritos econômicos e conhecimento da repressão no Brasil."
-updatedAt: 2026-08-04
+updatedAt: 2026-09-08
 ---
 
 ## O arquivo e seus limites
@@ -22,7 +22,7 @@ Em dezembro de 1971, Nixon recebeu Médici e descreveu o Brasil como país que r
 
 O Ato Institucional nº 5 permanecia em vigor. Prisões ilegais, tortura, censura e desaparecimentos faziam parte do sistema de governo. Autoridades americanas conheciam denúncias de violência e avaliavam seus efeitos sobre a relação bilateral.
 
-O diplomata Viron Vaky advertiu em 1971 que a identificação estreita com Médici poderia afastar outros setores brasileiros e prejudicar interesses futuros. Havia pressão no Congresso americano sobre cooperação policial e militar. Essas reservas coexistiram com a manutenção dos contatos e da assistência. A divergência interna em Washington não produziu rompimento com o regime.
+Em abril de 1970, Viron Vaky advertiu, no memorando de cobertura citado por Kissinger a Nixon, que a identificação estreita com o governo Médici poderia afastar outros setores da sociedade brasileira e prejudicar a relação no longo prazo. Havia pressão no Congresso americano sobre cooperação policial e militar. Essas reservas coexistiram com a manutenção dos contatos e da assistência. A divergência interna em Washington não produziu rompimento com o regime.
 
 ## Café, pesca e mar territorial
 
@@ -42,4 +42,4 @@ Brasília buscava autonomia em comércio, mar territorial, tecnologia nuclear e 
 
 Os rótulos de “satélite” e “parceiro igual” distorcem a relação em sentidos opostos. O Brasil negociava, resistia e exercia influência regional; os Estados Unidos dispunham de recursos e alcance muito maiores. A relação funcionava por barganha dentro dessa desigualdade.
 
-Documentos centrais: [revisão de política para o Brasil, 1970](https://history.state.gov/historicaldocuments/frus1969-76ve10/d120), [memorando de Viron Vaky, 1971](https://history.state.gov/historicaldocuments/frus1969-76ve10/d127), [reunião Nixon–Médici](https://history.state.gov/historicaldocuments/frus1969-76ve10/d141) e [preparação para a reunião Nixon–Delfim Neto](https://history.state.gov/historicaldocuments/frus1969-76ve10/d149).
+Documentos centrais: [revisão de política para o Brasil, 1970](https://history.state.gov/historicaldocuments/frus1969-76ve10/d120), [memorando de Kissinger sobre a ajuda de 1970, com a advertência de Vaky](https://history.state.gov/historicaldocuments/frus1969-76ve10/d127), [reunião Nixon–Médici](https://history.state.gov/historicaldocuments/frus1969-76ve10/d141) e [preparação para a reunião Nixon–Delfim Neto](https://history.state.gov/historicaldocuments/frus1969-76ve10/d149). No acervo deste site: [Documentação hemisférica: Brasil nos anos Nixon](/acervo/nixon-brasil-1972/).

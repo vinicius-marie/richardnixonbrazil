@@ -24,6 +24,32 @@ const imageSource = z.string().refine((value) => {
   message: 'Use uma imagem da Wikimedia ou um arquivo de /uploads/.',
 });
 
+const editorialStatus = z.enum([
+  'recovered',
+  'sourced',
+  'fact_checked',
+  'editorial_review',
+  'publishable',
+  'published',
+]).optional();
+
+const unpublishedStatuses = new Set([
+  'recovered',
+  'sourced',
+  'fact_checked',
+  'editorial_review',
+]);
+
+function rejectUnreadyPublication(entry: { draft: boolean; editorialStatus?: string }, context: { addIssue: (issue: { code: 'custom'; path: string[]; message: string }) => void }) {
+  if (entry.draft === false && entry.editorialStatus && unpublishedStatuses.has(entry.editorialStatus)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['draft'],
+      message: 'Entradas recovered/sourced/fact_checked/editorial_review não podem ser publicadas.',
+    });
+  }
+}
+
 const artigos = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/artigos' }),
   schema: z.object({
@@ -48,6 +74,7 @@ const artigos = defineCollection({
     sourceUrl: httpsUrl.optional(),
     sources: z.array(httpsUrl).default([]),
     homePlacement: z.enum(['lead', 'rail', 'none']).default('none'),
+    editorialStatus,
     draft: z.boolean().default(true),
   }).superRefine((article, context) => {
     if (article.cover && !article.coverAlt?.trim()) {
@@ -57,6 +84,7 @@ const artigos = defineCollection({
         message: 'Informe o texto alternativo da imagem.',
       });
     }
+    rejectUnreadyPublication(article, context);
   }),
 });
 
@@ -89,8 +117,11 @@ const documentos = defineCollection({
     ]).default('Original em inglês'),
     description: z.string().optional(),
     sources: z.array(httpsUrl).default([]),
+    people: z.array(z.string()).default([]),
+    themes: z.array(z.string()).default([]),
+    editorialStatus,
     draft: z.boolean().default(true),
-  }),
+  }).superRefine(rejectUnreadyPublication),
 });
 
 const paginas = defineCollection({
@@ -101,7 +132,9 @@ const paginas = defineCollection({
     description: z.string(),
     lede: z.string(),
     updatedAt: z.coerce.date(),
-  }),
+    editorialStatus,
+    draft: z.boolean().default(false),
+  }).superRefine(rejectUnreadyPublication),
 });
 
 export const collections = { artigos, documentos, paginas };

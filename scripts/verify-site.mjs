@@ -82,20 +82,25 @@ if (
   workflow.includes('workflow_dispatch:')
   || !workflow.includes("if: github.event_name == 'push' && github.ref == 'refs/heads/main'")
   || !workflow.includes('npm ci --ignore-scripts --no-audit --no-fund')
+  || !workflow.includes('scripts/check-branch-authority.mjs')
 ) {
   throw new Error('A publicação deve ocorrer exclusivamente após push na main.');
 }
 
 if (
-  !layout.includes('"script-src \'self\'"')
-  || layout.includes("'unsafe-inline'")
+  !layout.includes("script-src 'self'")
   || !layout.includes('<meta name="referrer" content="no-referrer"')
+  || !layout.includes('https://thumb.wikimedia.org')
 ) {
   throw new Error('A política de conteúdo e referência não está endurecida.');
 }
 
 if (!contentConfig.includes('sourceUrl: httpsUrl') || !contentConfig.includes('originalUrl: httpsUrl')) {
   throw new Error('Links editoriais externos devem aceitar apenas HTTPS.');
+}
+
+if (!contentConfig.includes('editorialStatus') || !cms.includes('name: editorialStatus')) {
+  throw new Error('O estado de maturidade editorial não está definido no schema ou no CMS.');
 }
 
 const documentosSchema = contentConfig.slice(
@@ -138,13 +143,25 @@ if (leadCount !== 1) {
   throw new Error(`A página inicial precisa de uma matéria principal; foram encontradas ${leadCount}.`);
 }
 
+const unpublishedStatuses = ['recovered', 'sourced', 'fact_checked', 'editorial_review'];
+
+function assertEditorialGate(source, name) {
+  const status = source.match(/^editorialStatus:\s*["']?([a-z_]+)/m)?.[1];
+  if (!status || !unpublishedStatuses.includes(status)) return;
+  if (/^draft:\s*false/m.test(source) || !/^draft:/m.test(source)) {
+    throw new Error(`${name} está marcado como ${status} e não pode ser publicado.`);
+  }
+}
+
 for (const [index, name] of articleNames.filter((entry) => extname(entry) === '.md').entries()) {
+  assertEditorialGate(articleSources[index], `artigos/${name}`);
   if (articleSources[index].includes('draft: false')) {
     await access(join('dist/artigos', name.replace(/\.md$/, ''), 'index.html'), constants.R_OK);
   }
 }
 
 for (const [index, name] of documentNames.filter((entry) => extname(entry) === '.md').entries()) {
+  assertEditorialGate(documentSources[index], `documentos/${name}`);
   if (documentSources[index].includes('draft: false')) {
     await access(join('dist/acervo', name.replace(/\.md$/, ''), 'index.html'), constants.R_OK);
   }
@@ -181,6 +198,13 @@ for (const file of htmlFiles) {
   }
   if (!html.includes('http-equiv="Content-Security-Policy"') || !html.includes('name="referrer" content="no-referrer"')) {
     throw new Error(`Política de segurança ausente: ${file}`);
+  }
+  const csp = html.match(/http-equiv="Content-Security-Policy" content="([^"]+)"/)?.[1] ?? '';
+  if (csp.includes('unsafe-inline') || csp.includes('unsafe-eval')) {
+    throw new Error(`CSP de produção permissiva: ${file}`);
+  }
+  if (!csp.includes("script-src 'self'") || !csp.includes("style-src 'self'") || !csp.includes('https://thumb.wikimedia.org')) {
+    throw new Error(`CSP incompleta: ${file}`);
   }
   if (/(?:href|src)="(?:javascript:|data:text\/html|http:)/i.test(html)) {
     throw new Error(`Protocolo inseguro encontrado: ${file}`);

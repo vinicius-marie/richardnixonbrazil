@@ -13,6 +13,8 @@ Artigos e fichas documentais são escritos em Markdown. O site usa Astro, é com
 
 O painel trabalha na branch `editorial`. A publicação ocorre somente depois de uma pull request para `main` e do check `build`.
 
+Agentes e colaboradores devem ler [AGENTS.md](AGENTS.md) antes de criar uma branch. A `main` é a única autoridade de produção; branches históricas (`artigo/*`, `revisao/*`, etc.) não são base de execução. O inventário recuperado na PR #28 permanece quarentenado.
+
 ## Desenvolvimento
 
 Requer Node.js 24.
