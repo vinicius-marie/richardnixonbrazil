@@ -27,6 +27,8 @@ Na página inicial:
 
 Imagem de capa exige texto alternativo, crédito e situação de direitos. URLs de fontes devem usar HTTPS. Mantenha **Rascunho** ativo enquanto o texto não estiver pronto.
 
+O campo **Maturidade editorial** é opcional. Entradas `recovered`, `sourced`, `fact_checked` ou `editorial_review` não podem ser publicadas (`Rascunho` desligado). Conteúdo já público pode permanecer sem o campo.
+
 ## Acervo
 
 Cada entrada deve informar título, data, formato, tema, arquivo de origem e URL do documento. Referências de caixa, pasta ou código arquivístico só devem ser preenchidas quando confirmadas pela instituição de custódia.

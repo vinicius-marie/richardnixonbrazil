@@ -25,7 +25,7 @@ body {
   line-height: 1.65;
 }
 a { color: inherit; text-decoration: none; }
-img { display: block; max-width: 100%; }
+img { display: block; max-width: 100%; height: auto; }
 button, input, select, textarea { font: inherit; }
 .shell { width: var(--shell); margin-inline: auto; }
 
@@ -405,10 +405,10 @@ select:focus-visible {
 .article-header h1 {
   margin: 14px 0 20px;
   font-family: var(--display);
-  font-size: clamp(2.7rem, 5vw, 4.5rem);
+  font-size: clamp(2.5rem, 4.4vw, 3.85rem);
   font-weight: 400;
   letter-spacing: -.02em;
-  line-height: 1.04;
+  line-height: 1.08;
 }
 .article-deck {
   max-width: 780px;
@@ -566,8 +566,11 @@ select:focus-visible {
   }
   .nav-menu[open] .mobile-nav { display: grid; }
   .mobile-nav a {
+    display: flex;
+    min-height: 44px;
+    align-items: center;
     border-bottom: 1px solid var(--line);
-    padding: 13px 8px;
+    padding: 12px 8px;
     white-space: normal;
   }
   .section-head,

@@ -23,11 +23,15 @@ npm run dev
 Antes de uma pull request:
 
 ```bash
+git fetch origin
+git merge-base --is-ancestor origin/main HEAD
 npm run build
 git diff --check
 ```
 
-O build verifica tipos, rotas, links internos, metadados, feed, rascunhos e configuração editorial.
+O build verifica tipos, rotas, links internos, metadados, feed, rascunhos, maturidade editorial e configuração. Uma PR baseada em branch histórica (`artigo/*`, `revisao/*`, `copilot/*`, etc.) deve falhar no preflight `scripts/check-branch-authority.mjs`.
+
+Crie a branch de trabalho **a partir de `origin/main`**. Não continue uma branch antiga só porque o nome parece relevante. Ver [AGENTS.md](../AGENTS.md).
 
 ## Alterações de conteúdo
 
@@ -51,7 +55,7 @@ Uma seção pública só deve ser criada quando houver conteúdo suficiente para
 4. acrescente uma verificação em `scripts/verify-site.mjs`;
 5. teste em tela pequena e larga.
 
-Cronologia, perfis, temas e galerias não devem ser expostos apenas para preencher uma taxonomia.
+Cronologia, perfis, temas e galerias não devem ser expostos apenas para preencher uma taxonomia. A PR #28 recupera essas coleções em quarentena; republicá-las exige segundo gate editorial e alteração explícita do verificador.
 
 ## Publicação e reversão
 

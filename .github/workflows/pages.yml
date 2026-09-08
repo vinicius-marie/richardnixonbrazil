@@ -18,12 +18,19 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          fetch-depth: 0
+
+      - name: Conferir autoridade da branch
+        run: node scripts/check-branch-authority.mjs
 
       - name: Preparar Node
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 24
           cache: npm
+
+      - name: Testar regras de autoridade
+        run: node --test scripts/check-branch-authority.test.mjs
 
       - name: Instalar dependências
         run: npm ci --ignore-scripts --no-audit --no-fund

@@ -79,6 +79,17 @@ content:
             - lead
             - rail
             - none
+      - name: editorialStatus
+        label: Maturidade editorial
+        type: select
+        options:
+          values:
+            - recovered
+            - sourced
+            - fact_checked
+            - editorial_review
+            - publishable
+            - published
       - name: draft
         label: Rascunho
         type: boolean
@@ -162,6 +173,17 @@ content:
         type: string
         list: true
         pattern: "^https://"
+      - name: editorialStatus
+        label: Maturidade editorial
+        type: select
+        options:
+          values:
+            - recovered
+            - sourced
+            - fact_checked
+            - editorial_review
+            - publishable
+            - published
       - name: draft
         label: Rascunho
         type: boolean
@@ -184,6 +206,17 @@ content:
           - { name: description, label: Descrição para busca, type: text, required: true }
           - { name: lede, label: Apresentação, type: text, required: true }
           - { name: updatedAt, label: Última revisão, type: date, required: true }
+          - name: editorialStatus
+            label: Maturidade editorial
+            type: select
+            options:
+              values:
+                - recovered
+                - sourced
+                - fact_checked
+                - editorial_review
+                - publishable
+                - published
           - { name: body, label: Texto, type: rich-text, required: true }
       - name: brasil
         label: Nixon e o Brasil
