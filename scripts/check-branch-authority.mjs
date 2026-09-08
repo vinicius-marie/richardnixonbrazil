@@ -74,8 +74,4 @@ if (!verdict.ok) {
   throw new Error(`${verdict.kind}: ${verdict.message}`);
 }
 
-if (verdict.kind === 'QUARANTINE') {
-  console.warn('QUARANTINE: esta branch pode ser auditada, mas não é base válida para novo trabalho nem autorização de merge.');
-}
-
 console.log('Autoridade da branch conferida.');
