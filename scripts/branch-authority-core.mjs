@@ -1,5 +1,4 @@
-const historicalPattern = /^(artigo|revisao|copilot|redesign|rebuild|recovery|feature|agent)\//;
-const quarantineBranches = new Set(['audit/nixon-recovery-2026-09-08']);
+const historicalPattern = /^(artigo|revisao|copilot|redesign|rebuild|recovery|feature|agent|audit|archive)\//;
 
 export function evaluateBranchAuthority({
   head,
@@ -12,7 +11,7 @@ export function evaluateBranchAuthority({
     return {
       ok: false,
       kind: 'HISTORICAL',
-      message: `A branch "${head}" é histórica e nunca é base de execução.`,
+      message: `A branch "${head}" é histórica ou de inventário e não serve como base de trabalho.`,
     };
   }
 
@@ -24,19 +23,11 @@ export function evaluateBranchAuthority({
     };
   }
 
-  if (quarantineBranches.has(head)) {
-    return {
-      ok: true,
-      kind: 'QUARANTINE',
-      message: `A branch "${head}" é quarentena arqueológica: pode ser verificada, mas não é autoridade de execução nem deve ser mesclada por atacado.`,
-    };
-  }
-
   if (mergeBase !== originMain || behind > 0) {
     return {
       ok: false,
       kind: 'STALE_WORK_BRANCH',
-      message: `A branch "${head}" não nasce do origin/main atual (merge-base=${mergeBase}, origin/main=${originMain}, behind=${behind}). Faça fetch e recrie/rebaseie o trabalho sobre origin/main.`,
+      message: `A branch "${head}" não nasce do origin/main atual (merge-base=${mergeBase}, origin/main=${originMain}, behind=${behind}). Recrie o trabalho sobre origin/main.`,
     };
   }
 

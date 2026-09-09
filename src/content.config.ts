@@ -117,8 +117,6 @@ const documentos = defineCollection({
     ]).default('Original em inglês'),
     description: z.string().optional(),
     sources: z.array(httpsUrl).default([]),
-    people: z.array(z.string()).default([]),
-    themes: z.array(z.string()).default([]),
     editorialStatus,
     draft: z.boolean().default(true),
   }).superRefine(rejectUnreadyPublication),
